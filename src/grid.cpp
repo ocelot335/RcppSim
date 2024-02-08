@@ -197,7 +197,7 @@ Range<UnitIterator<dim>> Grid<dim>::GetLocalUnits(const Unit<dim>& unit) {
     const auto& unitPos = unit.ChunkPosition();
     for (auto i : irange(dim)) {
         startPos[i] = unitPos[i] - LocalRadius[i];
-        endPos[i] = unitPos[i] + LocalRadius[i];
+        endPos[i] = unitPos[i] + LocalRadius[i] + 1;
     }
     return {
         UnitIterator<dim>(
