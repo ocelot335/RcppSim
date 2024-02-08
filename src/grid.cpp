@@ -176,7 +176,15 @@ void Grid<dim>::RemoveUnit(Unit<dim>& unit) {
             AddInteraction(unit, other, true);
         }
     }
-    unit.RemoveUnit();
+    try {
+        unit.RemoveUnit();
+    } catch(const std::runtime_error& re) {
+        std::string str = "";
+        for(auto tt: TotalPopulation) {
+            str += tt
+        }
+        throw std::runtime_error("Invalid Deletion unit i: "+ str);
+    }
 }
 
 template <size_t dim>
