@@ -179,11 +179,14 @@ void Grid<dim>::RemoveUnit(Unit<dim>& unit) {
     try {
         unit.RemoveUnit();
     } catch(const std::runtime_error& re) {
-        std::string str = "";
+        std::string str = "Total Population";
         for(auto tt: TotalPopulation) {
             str += std::to_string(tt);
             str += " ";
         }
+        str += "\nChunk Death Rate: " + std::to_string(unit.ChunkDeathRate());
+        str += "\nChunk Population: " + std::to_string(unit.ChunkPopulation());
+        str += "\nUnit Death Rate: " + std::to_string(unit.DeathRate());
         throw std::runtime_error("Invalid Deletion unit i: "+ str);
     }
 }
