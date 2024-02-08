@@ -181,7 +181,8 @@ void Grid<dim>::RemoveUnit(Unit<dim>& unit) {
     } catch(const std::runtime_error& re) {
         std::string str = "";
         for(auto tt: TotalPopulation) {
-            str += tt
+            str += tt;
+            str += " ";
         }
         throw std::runtime_error("Invalid Deletion unit i: "+ str);
     }
