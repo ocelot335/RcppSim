@@ -1,6 +1,6 @@
-\name{MathBioSim_n-package}
-\alias{MathBioSim_n-package}
-\alias{MathBioSim_n}
+\name{MathBioSim-package}
+\alias{MathBioSim-package}
+\alias{MathBioSim}
 \docType{package}
 \title{
   A short title line describing what the package does
