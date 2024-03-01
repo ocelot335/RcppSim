@@ -258,12 +258,17 @@ void Grid<dim>::SpawnRandom(size_t species) {
     auto parentUnit = Unit<dim>(*this, chunkPosition, eventIndex);
     const auto oldCoord = parentUnit.Coord();
     Coord<dim> newCoord;
+    double normals[dim];
+    double norm = 0;
     for (size_t i = 0; i < dim; ++i) {
-        newCoord[i] = oldCoord[i] + ModelParameters.GetBirthSpline(species)(
-            boost::random::uniform_01<>()(Rnd)
-        ) * (
-            boost::random::bernoulli_distribution<>(0.5)(Rnd) * 2 - 1
-        );
+        normals[i] = boost::random::normal_distribution<>()(Rnd);
+        norm += normals[i]*normals[i];
+    }
+    norm = std::sqrt(norm);
+    double radius = ModelParameters.GetBirthSpline(species)(boost::random::uniform_01<>()(Rnd));
+    
+    for (size_t i = 0; i < dim; ++i) {
+        newCoord[i] = oldCoord[i] + (normals[i]/norm)*radius;
     }
     AddUnit(newCoord, species);
 }
